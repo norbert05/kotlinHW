@@ -19,4 +19,8 @@ class UserController(private val userService: UserService) {
         return userService.createUser(userCreateDto)
     }
 
+    @GetMapping("/list/{username}")
+    fun getUser(@PathVariable username: String): UserDetailsDto {
+        return userService.getUser(username)
+    }
 }

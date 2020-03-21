@@ -17,4 +17,8 @@ class UserService(private val userRepository: UserRepository) {
     fun createUser(userCreateDto: UserCreateDto): UserDetailsDto {
         return userRepository.save(userCreateDto.mapToUser()).mapToUserDetailsDto()
     }
+
+    fun getUser(username: String): UserDetailsDto {
+        return userRepository.findByUsername(username).mapToUserDetailsDto()
+    }
 }
