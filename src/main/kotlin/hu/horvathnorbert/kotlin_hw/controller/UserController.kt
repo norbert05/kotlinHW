@@ -2,6 +2,7 @@ package hu.horvathnorbert.kotlin_hw.controller
 
 import hu.horvathnorbert.kotlin_hw.dto.user.UserCreateDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserDetailsDto
+import hu.horvathnorbert.kotlin_hw.dto.user.UserUpdateDto
 import hu.horvathnorbert.kotlin_hw.service.UserService
 import org.springframework.web.bind.annotation.*
 
@@ -22,5 +23,10 @@ class UserController(private val userService: UserService) {
     @GetMapping("/list/{username}")
     fun getUser(@PathVariable username: String): UserDetailsDto {
         return userService.getUser(username)
+    }
+
+    @PutMapping("{username}")
+    fun modifyName(@RequestParam name: String, @PathVariable username: String): UserDetailsDto {
+        return userService.modifyUser(UserUpdateDto(name = name, username = username))
     }
 }
