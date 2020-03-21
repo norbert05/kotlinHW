@@ -4,11 +4,14 @@ import hu.horvathnorbert.kotlin_hw.dto.user.UserCreateDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserDetailsDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserUpdateDto
 import hu.horvathnorbert.kotlin_hw.service.UserService
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping ("/user")
 class UserController(private val userService: UserService) {
+
+    val log = LoggerFactory.getLogger(UserController::class.java)
 
     @GetMapping("/list")
     fun getAllUser(): List<UserDetailsDto> {
@@ -22,6 +25,7 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("/list/{username}")
     fun getUser(@PathVariable username: String): UserDetailsDto {
+        log.info("Username: $username")
         return userService.getUser(username)
     }
 
