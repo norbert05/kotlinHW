@@ -21,4 +21,9 @@ class MessageController(private val messageService: MessageService) {
     fun addMessage(@RequestBody messageCreateDto: MessageCreateDto): MessageDetailsDto {
         return messageService.addMessage(messageCreateDto)
     }
+
+    @GetMapping("/list/{username}/{otherUsername}")
+    fun getConversation(@PathVariable username: String, @PathVariable otherUsername: String): List<MessageDetailsDto> {
+        return messageService.getConversation(username, otherUsername)
+    }
 }

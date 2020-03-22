@@ -31,4 +31,8 @@ class MessageService(private val messageRepository: MessageRepository,
 
         return messageRepository.save(messageCreateDto.mapToMessage(fromUser, toUser)).mapToMessageDetailDto()
     }
+
+    fun getConversation(username: String, otherUsername: String): List<MessageDetailsDto> {
+        return messageRepository.getConversation(username, otherUsername).map { it.mapToMessageDetailDto() }
+    }
 }
