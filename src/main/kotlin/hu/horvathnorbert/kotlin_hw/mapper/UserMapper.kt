@@ -11,3 +11,7 @@ fun User.mapToUserDetailsDto(): UserDetailsDto {
 fun UserCreateDto.mapToUser(): User {
     return User(username = this.userName, password = this.password, name = this.name)
 }
+
+fun List<User>.mapToDetailsDtoList() : List<UserDetailsDto> {
+    return this.map { it.mapToUserDetailsDto() }
+}
