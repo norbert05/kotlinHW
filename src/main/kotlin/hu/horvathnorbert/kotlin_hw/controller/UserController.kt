@@ -1,5 +1,6 @@
 package hu.horvathnorbert.kotlin_hw.controller
 
+import hu.horvathnorbert.kotlin_hw.dto.user.TokenDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserCreateDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserDetailsDto
 import hu.horvathnorbert.kotlin_hw.dto.user.UserUpdateDto
@@ -32,5 +33,10 @@ class UserController(private val userService: UserService) {
     @PutMapping("{username}")
     fun modifyName(@RequestParam name: String, @PathVariable username: String): UserDetailsDto {
         return userService.modifyUser(UserUpdateDto(name = name, username = username))
+    }
+
+    @GetMapping
+    fun login(@RequestParam username: String, @RequestParam password: String): TokenDto {
+        return userService.login(username, password)
     }
 }
